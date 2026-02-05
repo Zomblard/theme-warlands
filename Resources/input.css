@@ -3,12 +3,6 @@
 @tailwind utilities;
 @layer base {
 }
-.bg-main {
-    background: var(--bg-color);
-}
-.text-color {
-    color: var(--text-color);
-}
 h1 {
     font-size: 3em;
 }

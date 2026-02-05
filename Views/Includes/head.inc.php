@@ -59,25 +59,42 @@ $siteName = Website::getWebsiteName();
     ?>
 
     <script src="<?= EnvManager::getInstance()->getValue('PATH_SUBFOLDER') ?>Public/Themes/<?= ThemeLoader::getInstance()->getCurrentTheme()->name() ?>/Assets/Js/flowbite.js"></script>
-
-    <!--A UTILISER UNIQUEMENT SI ON VEUT LE SWITCH LIGHT / DARK
-    <script>
-        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark')
-        }
-    </script>
-    -->
-
 </head>
 
 <style>
 
-    :root {
-        --bg-color: <?= ThemeModel::getInstance()->fetchConfigValue('global','main_color')?>;
-        --text-color: <?= ThemeModel::getInstance()->fetchConfigValue('global','text_color')?>;
+    :root{
+        --grid-size: 56px;
+        --grid-color: 149, 63, 3; /* #953F03 */
+        --grid-opacity: .3;
+        --veil: .45;
     }
+
+    .hero-grid::before{
+        /* veil UNDER the grid */
+        content:"";
+        position:absolute; inset:0;
+        background: rgba(0,0,0,var(--veil));
+        pointer-events:none;
+        z-index: 0;
+    }
+
+    .hero-grid::after{
+        /* grid OVER the veil */
+        content:"";
+        position:absolute; inset:0;
+        background:
+            linear-gradient(to right, rgba(var(--grid-color), var(--grid-opacity)) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(var(--grid-color), var(--grid-opacity)) 1px, transparent 1px);
+        background-size: var(--grid-size) var(--grid-size);
+        pointer-events:none;
+        z-index: 1;
+    }
+
+    /* Small bounce */
+    @keyframes bounce-soft { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+    .bounce-soft{ animation: bounce-soft 1.2s infinite; }
+
 
     @font-face {  font-family: angkor;  src:url("<?= EnvManager::getInstance()->getValue('PATH_SUBFOLDER') ?>Public/Themes/<?= ThemeLoader::getInstance()->getCurrentTheme()->name() ?>/Assets/Webfonts/Angkor-Regular.ttf");  }
     @font-face {  font-family: ibmplexsans;  src:url("<?= EnvManager::getInstance()->getValue('PATH_SUBFOLDER') ?>Public/Themes/<?= ThemeLoader::getInstance()->getCurrentTheme()->name() ?>/Assets/Webfonts/IBMPlexSans-Regular.ttf");  }
@@ -124,7 +141,7 @@ $siteName = Website::getWebsiteName();
     @font-face {  font-family: silkscreen;  src:url("<?= EnvManager::getInstance()->getValue('PATH_SUBFOLDER') ?>Public/Themes/<?= ThemeLoader::getInstance()->getCurrentTheme()->name() ?>/Assets/Webfonts/Silkscreen-Regular.ttf");  }
 </style>
 
-<body class="bg-main text-color font-<?= ThemeModel::getInstance()->fetchConfigValue('global','main_font') ?> flex flex-col min-h-screen">
+<body class="bg-black text-white font-<?= ThemeModel::getInstance()->fetchConfigValue('global','main_font') ?> flex flex-col min-h-screen">
 
 <?php
 View::loadInclude($includes, 'beforeScript');

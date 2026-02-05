@@ -10,47 +10,16 @@ use CMW\Utils\Website;
 </footer>
 </html>
 
-<!--A UTILISER UNIQUEMENT SI ON VEUT LE SWITCH LIGHT / DARK
 <script>
-    var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
-    var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
-
-    // Change the icons inside the button based on previous settings
-    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        themeToggleLightIcon.classList.remove('hidden');
-    } else {
-        themeToggleDarkIcon.classList.remove('hidden');
-    }
-
-    var themeToggleBtn = document.getElementById('theme-toggle');
-
-    themeToggleBtn.addEventListener('click', function() {
-
-        // toggle icons inside button
-        themeToggleDarkIcon.classList.toggle('hidden');
-        themeToggleLightIcon.classList.toggle('hidden');
-
-        // if set via local storage previously
-        if (localStorage.getItem('color-theme')) {
-            if (localStorage.getItem('color-theme') === 'light') {
-                document.documentElement.classList.add('dark');
-                localStorage.setItem('color-theme', 'dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-                localStorage.setItem('color-theme', 'light');
-            }
-
-            // if NOT set via local storage previously
-        } else {
-            if (document.documentElement.classList.contains('dark')) {
-                document.documentElement.classList.remove('dark');
-                localStorage.setItem('color-theme', 'light');
-            } else {
-                document.documentElement.classList.add('dark');
-                localStorage.setItem('color-theme', 'dark');
-            }
-        }
-
-    });
+    const header = document.getElementById("siteHeader");
+    const onScroll = () => {
+        const y = window.scrollY || 0;
+        const t = Math.min(y / 180, 1); // speed of opacity ramp
+        // Transparent at top -> more opaque when scrolling
+        header.style.backgroundColor = `rgba(0,0,0,${0.05 + 0.75 * t})`;
+        header.style.backdropFilter = t > 0.1 ? "blur(10px)" : "none";
+        header.style.boxShadow = t > 0.25 ? "0 0 30px rgba(255,105,0,.08)" : "none";
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
 </script>
--->
