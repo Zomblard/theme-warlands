@@ -64,10 +64,11 @@ $siteName = Website::getWebsiteName();
 <style>
 
     :root{
-        --grid-size: 56px;
+        --grid-size: 71px;
         --grid-color: 149, 63, 3; /* #953F03 */
         --grid-opacity: .3;
-        --veil: .45;
+        --veil: .65;
+        --veil-img: .80;
     }
 
     .hero-grid::before{
@@ -77,6 +78,22 @@ $siteName = Website::getWebsiteName();
         background: rgba(0,0,0,var(--veil));
         pointer-events:none;
         z-index: 0;
+    }
+
+    .img-filter::before{
+        /* veil UNDER the grid */
+        content:"";
+        position:absolute; inset:0;
+        background: rgba(0,0,0,var(--veil-img));
+        pointer-events:none;
+        z-index: 0;
+    }
+    .img-filter::after{
+        /* grid OVER the veil */
+        content:"";
+        position:absolute; inset:0;
+        pointer-events:none;
+        z-index: 1;
     }
 
     .hero-grid::after{
@@ -141,7 +158,7 @@ $siteName = Website::getWebsiteName();
     @font-face {  font-family: silkscreen;  src:url("<?= EnvManager::getInstance()->getValue('PATH_SUBFOLDER') ?>Public/Themes/<?= ThemeLoader::getInstance()->getCurrentTheme()->name() ?>/Assets/Webfonts/Silkscreen-Regular.ttf");  }
 </style>
 
-<body class="bg-black text-white font-<?= ThemeModel::getInstance()->fetchConfigValue('global','main_font') ?> flex flex-col min-h-screen">
+<body class="bg-neutral-950 text-white font-exo2 flex flex-col min-h-screen">
 
 <?php
 View::loadInclude($includes, 'beforeScript');
