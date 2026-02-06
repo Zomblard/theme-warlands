@@ -67,8 +67,12 @@ $siteName = Website::getWebsiteName();
         --grid-size: 71px;
         --grid-color: 149, 63, 3; /* #953F03 */
         --grid-opacity: .3;
-        --veil: .65;
-        --veil-img: .80;
+        --veil: .45;
+        --veil-img: .60;
+    }
+
+    .grid-cols-14 {
+        grid-template-columns:repeat(14,minmax(0,1fr))
     }
 
     .hero-grid::before{

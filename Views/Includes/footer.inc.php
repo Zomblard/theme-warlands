@@ -5,8 +5,19 @@ use CMW\Utils\Website;
 ?>
 </body>
 
-<footer class="mt-auto z-50 bg-gray-300 py-2 text-center">
-    <p>Copyright © <?= date('Y') ?> - Par <a href="https://craftmywebsite.fr" class="text-blue-600 hover:text-blue-500" target="_blank">CraftMyWebsite</a> pour <?= Website::getWebsiteName() ?></p>
+<footer class="mt-auto mx-auto z-50 max-w-7xl w-full py-8 text-center">
+    <div class="flex justify-between">
+        <div class="text-left">
+            <p>Copyright © <?= date('Y') ?> WarLands. Tous droits réservés.</p>
+            <p>Nous ne sommes pas affiliés à Mojang AB.</p>
+        </div>
+        <div class="flex gap-8">
+            <a href="" target="_blank">Discord</a>
+            <a href="" target="_blank">Règles</a>
+            <a href="" target="_blank">Wiki</a>
+            <a href="" target="_blank">Support</a>
+        </div>
+    </div>
 </footer>
 </html>
 
